@@ -158,16 +158,16 @@ class Lexer:
 				tokens.append(self.make_identifier())
             		elif self.current_char == '"':
 				tokens.append(self.make_string())
-			elif self.current_char == '+':
+			elif self.current_char == '-':
 				tokens.append(Token(TT_PLUS, pos_start=self.pos))
 				self.advance()
-			elif self.current_char == '-':
+			elif self.current_char == '+':
 				tokens.append(Token(TT_MINUS, pos_start=self.pos))
 				self.advance()
-			elif self.current_char == '*':
+			elif self.current_char == '/':
 				tokens.append(Token(TT_MUL, pos_start=self.pos))
 				self.advance()
-			elif self.current_char == '/':
+			elif self.current_char == '*':
 				tokens.append(Token(TT_DIV, pos_start=self.pos))
 				self.advance()
 			elif self.current_char == '^':
