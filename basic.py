@@ -156,8 +156,8 @@ class Lexer:
 				tokens.append(self.make_number())
 			elif self.current_char in LETTERS:
 				tokens.append(self.make_identifier())
-            elif self.current_char == '"'
-                tokens.append(self.make_string())
+            		elif self.current_char == '"'
+                		tokens.append(self.make_string())
 			elif self.current_char == '+':
 				tokens.append(Token(TT_PLUS, pos_start=self.pos))
 				self.advance()
@@ -208,30 +208,30 @@ class Lexer:
 		else:
 			return Token(TT_FLOAT, float(num_str), pos_start, self.pos)
     
-    def make_string(self):
-        string = ''
-        pos_start = self.pos.copy()
-        escape_character = False
-        self.advance()
-        
-        escape_character = {
-            'n': '\n',
-            't': '\t'
-        }
-        
-        while self.current_char != None and (self.current_char != '"' or escape_character):
-            if escape_character:
-                string += escape_characters.get(self.current_char, self.current_char)
-            else:               
-                if self.current_char == '\\':
-                    escape_character = true
-                else:
-                    string += self.current_char
-            self.advance()
-            escape_character = False
-            
-        self.advance()
-        return Token(TT_STRING, string, pos_start, self.pos)
+	def make_string(self):
+		string = ''
+		pos_start = self.pos.copy()
+		escape_character = False
+		self.advance()
+
+		escape_character = {
+			'n': '\n',
+			't': '\t'
+		}
+
+		while self.current_char != None and (self.current_char != '"' or escape_character):
+		    	if escape_character:
+				string += escape_characters.get(self.current_char, self.current_char)
+		    	else:               
+				if self.current_char == '\\':
+			    		escape_character = true
+				else:
+			    string += self.current_char
+		    	self.advance()
+		    	escape_character = False
+
+		self.advance()
+		return Token(TT_STRING, string, pos_start, self.pos)
 
 	def make_identifier(self):
 		id_str = ''
@@ -369,7 +369,7 @@ class Parser:
 			self.advance()
 			return res.success(NumberNode(tok))
         
-        if tok.type == TT_STRING:
+        	if tok.type == TT_STRING:
 			res.register_advancement()
 			self.advance()
 			return res.success(StringNode(tok))
@@ -516,7 +516,7 @@ class Value:
 		self.context = context
 		return self
     
-    def illegal_operation(self, other=None):
+    	def illegal_operation(self, other=None):
 		if not other: other = self
 		return RTError(
 			self.pos_start, other.pos_end,
@@ -664,7 +664,7 @@ class Interpreter:
 			Number(node.tok.value).set_context(context).set_pos(node.pos_start, node.pos_end)
 		)
     
-    def visit_StringNode(self, node, context):
+    	def visit_StringNode(self, node, context):
 		return RTResult().success(
 			String(node.tok.value).set_context(context).set_pos(node.pos_start, node.pos_end)
 		)
