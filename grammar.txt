@@ -1,13 +1,13 @@
 nes (8 sloc) 238 Bytes
 expr    : KEYWORD:VAR IDENTIFIER EQ expr
-				:	term ((PLUS|MINUS) term)*
+	: term ((PLUS|MINUS) term)*
 
 term    : factor ((MUL|DIV) factor)*
 
 factor	: (PLUS|MINUS) factor
-				: power
+	: power
 
-power		: atom (POW factor)*
+power	: atom (POW factor)*
 
-atom 		: INT|FLOAT|STRING|BOOLEAN|IDENTIFIER
-				: LPAREN expr RPAREN
+atom 	: INT|FLOAT|STRING|BOOLEAN|IDENTIFIER
+	: LPAREN expr RPAREN
